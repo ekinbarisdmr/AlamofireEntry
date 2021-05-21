@@ -116,6 +116,7 @@
 		3169A2E3264EFBDD007ED1B7 /* AlamofireEntry */ = {
 			isa = PBXGroup;
 			children = (
+				317C610A26587D5F00B6B657 /* Lottie */,
 				3155103E26507D0B00680EDE /* Base */,
 				3169A320264F1345007ED1B7 /* Network */,
 				3169A2FC264EFC10007ED1B7 /* Supporting Files */,
@@ -127,7 +128,6 @@
 				3169A2ED264EFBDF007ED1B7 /* Assets.xcassets */,
 				3169A2EF264EFBDF007ED1B7 /* LaunchScreen.storyboard */,
 				3169A2F2264EFBDF007ED1B7 /* Info.plist */,
-				310E63232651924D00CCBA5D /* lf30_editor_lbprmztg.json */,
 			);
 			path = AlamofireEntry;
 			sourceTree = "<group>";
@@ -243,6 +243,14 @@
 				3169A321264F1350007ED1B7 /* API.swift */,
 			);
 			path = Network;
+			sourceTree = "<group>";
+		};
+		317C610A26587D5F00B6B657 /* Lottie */ = {
+			isa = PBXGroup;
+			children = (
+				310E63232651924D00CCBA5D /* lf30_editor_lbprmztg.json */,
+			);
+			path = Lottie;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
