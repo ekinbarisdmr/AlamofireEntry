@@ -30,7 +30,7 @@ class MainViewController: UIViewController {
 
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        self.getData2()
+        self.getDataWithAPI()
         searchController.searchBar.text = ""
         searchController.isActive = false
     }
@@ -40,8 +40,8 @@ class MainViewController: UIViewController {
         setupTableView()
         setSearchBar()
         setupAnimation()
-        getData()
-        //getData2()
+        getDataWithAPI()
+        //getDataWithAlamofire()
         
     }
     
@@ -66,9 +66,9 @@ class MainViewController: UIViewController {
         self.navigationController?.navigationBar.shadowImage = UIImage()
         self.navigationController?.navigationBar.isTranslucent = true
         self.navigationController?.navigationBar.backgroundColor = UIColor.customColor()
-        self.navigationController?.navigationBar.tintColor = .orange
-        self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor : UIColor.orange]
-        self.navigationController?.navigationBar.largeTitleTextAttributes = [NSAttributedString.Key.foregroundColor : UIColor.orange]
+        self.navigationController?.navigationBar.tintColor = .white
+        self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor : UIColor.white]
+        self.navigationController?.navigationBar.largeTitleTextAttributes = [NSAttributedString.Key.foregroundColor : UIColor.white]
         self.navigationController?.navigationBar.prefersLargeTitles = true
         self.navigationController!.setStatusBar(backgroundColor: UIColor.customColor())
         self.navigationItem.largeTitleDisplayMode = .always
@@ -81,8 +81,8 @@ class MainViewController: UIViewController {
     }
     
     func setSearchBar() {
-        searchController.searchBar.searchTextField.attributedPlaceholder = NSAttributedString(string: "Search...", attributes: [NSAttributedString.Key.foregroundColor : UIColor.orange, NSAttributedString.Key.font : UIFont(name: "HelveticaNeue-Medium", size: 13.0)!])
-        searchController.searchBar.searchTextField.textColor = .orange
+        searchController.searchBar.searchTextField.attributedPlaceholder = NSAttributedString(string: "Search...", attributes: [NSAttributedString.Key.foregroundColor : UIColor.white, NSAttributedString.Key.font : UIFont(name: "HelveticaNeue-Medium", size: 13.0)!])
+        searchController.searchBar.searchTextField.textColor = .white
         searchController.searchBar.searchTextField.font = UIFont(name: "HelveticaNeue-Medium", size: 15.0)
         searchController.dimsBackgroundDuringPresentation = false
         let attributes:[NSAttributedString.Key: Any] = [
@@ -104,7 +104,7 @@ class MainViewController: UIViewController {
     }
     
     
-    func getData2() {   /* -- API.SWIFT -- */
+    func getDataWithAPI() {   /* -- API.SWIFT -- */
         
         API.sharedManager.getUsers { [self] (response) in
             self.entries = response.entries!
@@ -119,7 +119,7 @@ class MainViewController: UIViewController {
     }
     
     
-    func getData() {   /* -- ALAMOFIRE -- */
+    func getDataWithAlamofire() {   /* -- ALAMOFIRE -- */
         
         
         Alamofire.request("https://api.publicapis.org/entries", method: .get).responseJSON { (response) in

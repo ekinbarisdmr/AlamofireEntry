@@ -6,11 +6,13 @@
 //
 
 import UIKit
+import SafariServices
 
-class DetailsViewController: UIViewController {
+class DetailsViewController: UIViewController, SFSafariViewControllerDelegate {
     
     @IBOutlet weak var tableView: UITableView!
     var entries: [EntriesModel] = [EntriesModel]()
+    var webLink = ""
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -86,10 +88,11 @@ extension DetailsViewController: UITableViewDelegate, UITableViewDataSource {
             cell.descriptionLabel.adjustsFontSizeToFitWidth = true
             cell.descriptionLabel.translatesAutoresizingMaskIntoConstraints = false
             cell.descriptionLabel.sizeToFit()
-
+            
         }
         
         if let link = entries[indexPath.row].Link {
+            webLink = link
             cell.linkLabel.text = link
             cell.linkLabel.numberOfLines = 0
             cell.linkLabel.adjustsFontSizeToFitWidth = true
@@ -104,20 +107,21 @@ extension DetailsViewController: UITableViewDelegate, UITableViewDataSource {
             
         }
         
-        
-        
         cell.tapButton = {
             
-            let mainStoryboard = UIStoryboard(name: "Main", bundle: Bundle.main)
-            if let vc = mainStoryboard.instantiateViewController(identifier: "WebViewController") as? WebViewController {
-                
-                vc.link = self.entries[indexPath.row].Link!
-                self.present(vc, animated: true, completion: nil)
+            
+            if let url = self.entries[indexPath.row].Link {
+                self.webLink = "\(url)"
+                let safariVC = SFSafariViewController(url: URL(string: self.webLink)!)
+                self.present(safariVC, animated: true, completion: nil)
             }
         }
         
-        
         return cell
+    }
+    
+    func safariViewControllerDidFinish(_ controller: SFSafariViewController) {
+        controller.navigationController?.popViewController(animated: true)
     }
     
     

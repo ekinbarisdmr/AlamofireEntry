@@ -5,9 +5,8 @@
 //  Created by Ekin Barış Demir on 15.05.2021.
 //
 
+import Foundation
 import UIKit
-
-
 
 class DetailsTableViewCell: UITableViewCell {
     
@@ -41,7 +40,7 @@ class DetailsTableViewCell: UITableViewCell {
     }
     
     @objc func showLink(sender: UITapGestureRecognizer) {
-        print("eko")
+        
     }
     
   
