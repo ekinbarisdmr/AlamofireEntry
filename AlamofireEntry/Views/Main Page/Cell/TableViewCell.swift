@@ -15,8 +15,6 @@ class TableViewCell: UITableViewCell {
 
     override func awakeFromNib() {
         super.awakeFromNib()
-
-
         colorView.layer.cornerRadius = 16
         
     }

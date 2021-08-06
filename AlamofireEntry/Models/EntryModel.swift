@@ -22,25 +22,5 @@ struct EntriesModel: Decodable {
     var Cors: String?
     var Link: String?
     var Category: String?
-    
-    init() {
-        
-    }
-    
-   
-    
-    init(API: String, Description: String, Auth: String, HTTPS: Bool, Cors: String, Link: String, Category: String) {
-        
-        
-        self.API = API
-        self.Description = Description
-        self.Auth = Auth
-        self.HTTPS = HTTPS
-        self.Cors = Cors
-        self.Link = Link
-        self.Category = Category
-        
-    }
-    
-    
+
 }

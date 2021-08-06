@@ -19,34 +19,32 @@ class MainViewController: UIViewController {
     let animationView = AnimationView()
     
     
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = UIColor.customColor()
         setSetups()
         
     }
-    
 
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        self.getDataWithAPI()
+        self.getUser()
         searchController.searchBar.text = ""
         searchController.isActive = false
     }
     
     func setSetups() {
+        
         setupNavigationBar()
         setupTableView()
         setSearchBar()
         setupAnimation()
-        getDataWithAPI()
-        //getDataWithAlamofire()
+        getUser()
         
     }
     
-    
     func setupAnimation() {
+        
         animationView.animation = Animation.named("lf30_editor_lbprmztg")
         animationView.center = view.center
         animationView.frame = CGRect(x: view.frame.size.width/2 - 75, y: view.frame.size.height/2 - 75, width: 150, height: 150)
@@ -54,12 +52,9 @@ class MainViewController: UIViewController {
         animationView.play()
         animationView.loopMode = .autoReverse
         view.addSubview(animationView)
+        
     }
-    
-    
-    
-   
-    
+ 
     func setupNavigationBar() {
         
         self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
@@ -77,22 +72,20 @@ class MainViewController: UIViewController {
         self.navigationItem.title = "API List"
         self.navigationItem.searchController = searchController
         
-        
     }
     
     func setSearchBar() {
+        
         searchController.searchBar.searchTextField.attributedPlaceholder = NSAttributedString(string: "Search...", attributes: [NSAttributedString.Key.foregroundColor : UIColor.white, NSAttributedString.Key.font : UIFont(name: "HelveticaNeue-Medium", size: 13.0)!])
         searchController.searchBar.searchTextField.textColor = .white
         searchController.searchBar.searchTextField.font = UIFont(name: "HelveticaNeue-Medium", size: 15.0)
         searchController.dimsBackgroundDuringPresentation = false
         let attributes:[NSAttributedString.Key: Any] = [
             .foregroundColor: UIColor.orange,
-            .font: UIFont(name: "HelveticaNeue-Bold", size: 18.0) ?? UIFont.systemFont(ofSize: 18.0)
-        ]
+            .font: UIFont(name: "HelveticaNeue-Bold", size: 18.0) ?? UIFont.systemFont(ofSize: 18.0)]
         UIBarButtonItem.appearance(whenContainedInInstancesOf: [UISearchBar.self]).setTitleTextAttributes(attributes, for: .normal)
         searchController.searchBar.delegate = self
     }
-    
     
     func setupTableView() {
         
@@ -104,44 +97,14 @@ class MainViewController: UIViewController {
     }
     
     
-    func getDataWithAPI() {   /* -- API.SWIFT -- */
+    func getUser() {
         
         API.sharedManager.getUsers { [self] (response) in
             self.entries = response.entries!
             self.tableView.reloadData()
             animationView.stop()
-
-            
         } errorHandler: { (error) in
             print(error)
-        }
-        
-    }
-    
-    
-    func getDataWithAlamofire() {   /* -- ALAMOFIRE -- */
-        
-        
-        Alamofire.request("https://api.publicapis.org/entries", method: .get).responseJSON { (response) in
-            //print(response)
-            
-            if let data = response.data {
-                
-                do {
-                    
-                    let responses = try JSONDecoder().decode(Model.self, from: data)
-                    // print(responses)
-                    
-                    self.entries = responses.entries!
-                    
-                    DispatchQueue.main.async {
-                        self.tableView.reloadData()
-                    }
-                    
-                }catch{
-                    print(error.localizedDescription)
-                }
-            }
         }
     }
 }
@@ -156,11 +119,9 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
         if searchController.isActive == true && searchController.searchBar.text != "" {
-            
             return searchResults.count
-            
-        }else {
-            
+        }
+        else {
             return entries.count
             
         }
@@ -180,11 +141,9 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
             cell.descriptionLabel.numberOfLines = 0
             cell.descriptionLabel.adjustsFontSizeToFitWidth = true
             cell.descriptionLabel.sizeToFit()
-           
-
-            
-            
-        }else{
+ 
+        }
+        else {
             
             cell.apiLabel.text = entries[indexPath.row].API
             cell.descriptionLabel.text = entries[indexPath.row].Description
@@ -196,7 +155,6 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
             cell.descriptionLabel.sizeToFit()
             
         }
-        
         return cell
     }
     
@@ -209,7 +167,8 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
             
             if searchController.isActive == true && searchController.searchBar.text != "" {
                 vc.entries = [searchResults[indexPath.row]]
-            }else{
+            }
+            else {
                 vc.entries = [entries[indexPath.row]]
 
             }
@@ -235,7 +194,6 @@ extension MainViewController: UISearchBarDelegate {
         
         searchResults = entries.filter({ (entries) -> Bool in
             let match = entries.API?.range(of: searchText, options: .caseInsensitive)
-            
             return (match != nil)
         })
         tableView.reloadData()

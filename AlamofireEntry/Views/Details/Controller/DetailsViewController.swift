@@ -34,7 +34,6 @@ class DetailsViewController: UIViewController, SFSafariViewControllerDelegate {
     
     func setupNavigationBar() {
         
-        
         self.navigationController?.navigationBar.isTranslucent = true
         self.navigationController?.navigationBar.backgroundColor = UIColor.customColor()
         self.navigationController!.setStatusBar(backgroundColor: UIColor.customColor())
@@ -42,11 +41,7 @@ class DetailsViewController: UIViewController, SFSafariViewControllerDelegate {
         self.navigationItem.hidesSearchBarWhenScrolling = false
         self.navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
         definesPresentationContext = true
-        
-        
     }
-    
-    
 }
 
 extension DetailsViewController: UITableViewDelegate, UITableViewDataSource {
@@ -109,7 +104,6 @@ extension DetailsViewController: UITableViewDelegate, UITableViewDataSource {
         
         cell.tapButton = {
             
-            
             if let url = self.entries[indexPath.row].Link {
                 self.webLink = "\(url)"
                 let safariVC = SFSafariViewController(url: URL(string: self.webLink)!)
@@ -123,6 +117,5 @@ extension DetailsViewController: UITableViewDelegate, UITableViewDataSource {
     func safariViewControllerDidFinish(_ controller: SFSafariViewController) {
         controller.navigationController?.popViewController(animated: true)
     }
-    
     
 }

@@ -30,9 +30,6 @@ class DetailsTableViewCell: UITableViewCell {
         colorView.roundCorners(corners: [.bottomLeft, .bottomRight], radius: 20)
         showButton.layer.cornerRadius = 20
         
-
-
-       
     }
     
     @IBAction func showButton(_ sender: Any) {
@@ -42,9 +39,5 @@ class DetailsTableViewCell: UITableViewCell {
     @objc func showLink(sender: UITapGestureRecognizer) {
         
     }
-    
-  
-
-   
     
 }

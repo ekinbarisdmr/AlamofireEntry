@@ -12,9 +12,7 @@ class API {
     
     static let sharedManager = API()
     private var sessionManager = SessionManager()
-    private init() { }
-    
-    
+    private init() { }    
     
     fileprivate let encoding = JSONEncoding.default
     
